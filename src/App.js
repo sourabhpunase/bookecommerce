@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import styles from './App.module.css';
+import './App.css'; // Import the regular CSS file
 
 // Import your existing components
-import Navbar from './Components/Navbar/Navbar';
+import { Navbar } from './Components/Navbar/Navbar';
 import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
 import Home from './Components/Home/Home';
@@ -15,9 +15,9 @@ import { ProductDetails } from './pages/ProductDetails';
 
 // Import UserContextProvider if not already imported
 import { UserContextProvider } from './userContext';
-
-// Import the CSS file
-import './App.module.css';
+import { Header } from './Components/Home/Header';
+import { Control } from './Components/route/Control';
+import Search from './Components/Home/Search';
 
 function App() {
   const [showWallpaper, setShowWallpaper] = useState(true);
@@ -26,80 +26,8 @@ function App() {
     setShowWallpaper(false);
   };
 
-  const router = createBrowserRouter([
-    // Your routes configuration
-    {
-      path: '/',
-      element: (
-        <UserContextProvider>
-          <Navbar />
-          <Home />
-        </UserContextProvider>
-      )
-    },
-    {
-      path: '/login',
-      element: (
-        <UserContextProvider>
-          <Navbar />
-          <Login />
-        </UserContextProvider>
-      )
-    },
-    {
-      path: '/signup',
-      element: (
-        <UserContextProvider>
-          <Navbar />
-          <SignUp />
-        </UserContextProvider>
-      )
-    },
-    {
-      path: '/cart',
-      element: (
-        <UserContextProvider>
-          <Navbar />
-          <Cart />
-        </UserContextProvider>
-      )
-    },
-    {
-      path: '/orders',
-      element: (
-        <UserContextProvider>
-          <Navbar />
-          <Order />
-        </UserContextProvider>
-      )
-    },
-    {
-      path: '/product',
-      children: [
-        {
-          index: true,
-          element: (
-            <UserContextProvider>
-              <Navbar />
-              <Product />
-            </UserContextProvider>
-          )
-        },
-        {
-          path: ':productId',
-          element: (
-            <UserContextProvider>
-              <Navbar />
-              <Product />
-            </UserContextProvider>
-          )
-        }
-      ]
-    }
-  ]);
-
   return (
-    <div className={styles.main}>
+    <div className="main"> {/* Update class name */}
       <Helmet>
         <meta charSet="utf-8" />
         <title>Busy Buy</title>
@@ -107,7 +35,7 @@ function App() {
       </Helmet>
 
       {/* Render the WallpaperComponent */}
-      {showWallpaper && (
+      {/* {showWallpaper && (
         <div
           className="wallpaper-container"
           onAnimationEnd={handleAnimationEnd}
@@ -119,10 +47,27 @@ function App() {
             }}
           />
         </div>
-      )}
+      )} */}
 
       {/* Render the router provider */}
-      {!showWallpaper && <RouterProvider router={router} />}
+      <Router>
+        <UserContextProvider>
+       <Navbar/>
+          <Routes>
+           
+            <Route path="/"  element={<Control/>} />
+            <Route path='/search' element={Search}/>
+            
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/orders" element={<Order />} />
+            <Route path="/product" element={<Product />} >
+            <Route path="/product/:productId" element={<ProductDetails />} />
+          </Route>
+          </Routes>
+        </UserContextProvider>
+      </Router>
     </div>
   );
 }

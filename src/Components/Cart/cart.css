@@ -1,0 +1,131 @@
+/* cart.css */
+
+/* Main cart container */
+.cartitems {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+ color: rgb(251, 247, 247);
+ background: linear-gradient(320deg, rgba(62, 185, 121, 0.974), rgba(118, 32, 94, 0.568));
+    border-radius: 10px;
+}
+
+/* Cart item headings */
+.cartitem-main {
+    display: grid;
+    grid-template-columns: 1fr repeat(4, minmax(80px, 1fr)) 1fr;
+    align-items: center;
+    font-weight: bold;
+}
+
+/* Individual cart items */
+.cartitem-format {
+    display: grid;
+    grid-template-columns: 1fr repeat(4, minmax(80px, 1fr)) 1fr;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+/* Cart item image */
+.carticon-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Cart item buttons and inputs */
+.carticon-quantity {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.carticon-remove {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Cart total section */
+.cartitems-total {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #95bbb062;
+    border-radius: 10px;
+}
+.cartitems-total h1{
+text-align: center;
+}
+
+/* Checkout button */
+.cartitems-total button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #7281425d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cartitems-total button:hover {
+    background-color: #743d655b;
+}
+
+/* Promo code section */
+.promocode {
+    margin-top: 20px;
+}
+
+.promocode input[type='text'] {
+    width: calc(100% - 90px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.promocode button {
+    width: 90px;
+    padding: 10px;
+    background-color: #4ba093;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.promocode button:hover {
+    background-color: #4771716d;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .cartitem-main,
+    .cartitem-format {
+        grid-template-columns: 1fr repeat(3, minmax(80px, 1fr)) 1fr;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cartitem-main,
+    .cartitem-format {
+        grid-template-columns: 1fr repeat(2, minmax(60px, 1fr)) 1fr;
+        font-size: 12px;
+    }
+
+    .carticon-icon {
+        width: 50px;
+        height: 50px;
+    }
+}

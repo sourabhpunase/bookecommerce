@@ -33,6 +33,7 @@ const SignUp = () => {
     }
     // signup settings function
     const signup = () => {
+       
         if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
             toast.error("Please Enter Name, Username and Password");
         }
@@ -40,6 +41,7 @@ const SignUp = () => {
             newUser(name, email, password);
             navigate("/")
         }
+      
     }
     return (
         <div className={styles.container}>

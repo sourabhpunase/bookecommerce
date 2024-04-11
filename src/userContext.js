@@ -1,15 +1,11 @@
-//IMPORT HOOK AND CONTEXT
 import {
     useState,
     useContext,
     createContext,
     useEffect
-} from 'react'
+} from 'react';
 
-//IMPORT DATABASE
-import { db } from "./firebaseinit"
-
-//IMPORT FIREBASE KEYWORDS
+import { db } from "./firebaseinit";
 import {
     addDoc,
     collection,
@@ -17,37 +13,34 @@ import {
     updateDoc,
     doc
 } from 'firebase/firestore';
-
-//GETTING TOAST
 import { toast } from 'react-toastify';
 
-//CREATE CONTEXT
 const userContext = createContext();
 
-//USE CUSTOM HOOK
 export const useUserContext = () => {
     const value = useContext(userContext);
     return value;
 }
-
-//USE CUSTOM CONTEXT
+function getDefaultCart() {
+    let cart = {};
+    for (let index = 0; index < 10; index++) {
+        cart[index] = 0;
+    }
+    return cart;
+}
 export const UserContextProvider = ({ children }) => {
-
-    //authentication
     const [authenticate, setAuthenticate] = useState(false);
-
-    //make user info
-    const [userCart, setUserCart] = useState([]);
     const [userOrder, setUserOrder] = useState([]);
     const [userId, setUserId] = useState("");
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [cartItems, setCartItems] = useState(getDefaultCart());
 
-    //get date
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;
     const date = currentDate.getDate();
+
 
 
     useEffect(() => {
@@ -66,33 +59,28 @@ export const UserContextProvider = ({ children }) => {
             toast.error("Error fetching books. Please try again later.");
         }
     };
-    //check authentication
+
     const authenticateUser = async (email, password) => {
         let isFound = false;
         const users = collection(db, "users");
         const querySnapshot = await getDocs(users);
+        console.log("Query Snapshot:", querySnapshot);
         querySnapshot.forEach((doc) => {
+            console.log("User Document:", doc.data());
             if (doc.data().email === email && doc.data().password === password) {
-                console.log(doc.id);
+                console.log("User found:", doc.id);
                 setUserId(doc.id);
                 setUserOrder(doc.data().orders);
-                setUserCart(doc.data().cart);
-                isFound = true
+                setCartItems(doc.data().cart);
+                isFound = true;
                 setAuthenticate(true);
-                console.log("auth", isFound);
+                console.log("Authenticated:", isFound);
             }
-            else if (doc.data().email !== email && doc.data().password !== password) {
-            }
-        })
-        if (isFound) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+        });
+        console.log("Is Found:", isFound);
+        return isFound;
+    };
 
-    //add new user
     const newUser = (name, email, password) => {
         const user = {
             name: name,
@@ -100,45 +88,76 @@ export const UserContextProvider = ({ children }) => {
             password: password,
             cart: [],
             orders: []
-        }
+        };
+        console.log("New User Data:", user);
         const useRef = collection(db, "users");
-        const docRef = addDoc(useRef, user);
+        console.log("User Collection Reference:", useRef);
+        const docRef = addDoc(useRef, user).then((ref) => {
+            console.log("New User Document ID:", ref.id);
+        });
         setAuthenticate(true);
-        toast.success("New User Created Successfully")
-    }
+        toast.success("New User Created Successfully");
+    
+    };
 
-    //logout user
     const logout = async () => {
-        console.log(userId);
+        console.log("User ID:", userId);
         const useRef = doc(db, "users", userId);
+        console.log("User Document Reference:", useRef);
         await updateDoc(useRef, {
             orders: userOrder,
-            cart: userCart
+            cart: cartItems
         });
         setAuthenticate(false);
-        toast.success("Log out Successfully");
-    }
+        console.log("Logged out Successfully");
+        toast.success("Logged out Successfully");
+    };
 
-    //set use cart
-    const setCartUser = (cart) => {
-        setUserCart(cart);
-    }
+    const addToCart = (itemId) => {
+        setCartItems(prev => ({
+            ...prev,
+            [itemId]: prev[itemId] + 1
+        }));
+        console.log(cartItems);
+    };
 
-    // checkout
     const checkOut = () => {
         let orderDate = date.toString() + '-' + month.toString() + '-' + year.toString();
-        let newOrder = { date: orderDate, order: userCart };
-        setUserOrder([newOrder, ...userOrder])
-        setUserCart([]);
+        let newOrder = { date: orderDate, order: cartItems };
+        setUserOrder([newOrder, ...userOrder]);
+        setCartItems(getDefaultCart());
         toast.success("Items Purchased Successfully");
     };
 
-    //remove from cart
-    const removeFromCart = (id) => {
-        let updatedCart = userCart.filter((product) => product.id !== id)
-        setUserCart(updatedCart);
-        toast.error("Item delated Successfully")
-    }
+    const removeCart = (itemId) => {
+        if (cartItems[itemId] > 0) {
+            setCartItems(prev => ({
+                ...prev,
+                [itemId]: prev[itemId] - 1
+            }));
+        }
+    };
+
+    const gettotalAmount = () => {
+        let totalAmount = 0;
+        for (const item in cartItems) {
+            if (cartItems[item] > 0) {
+                let itemInfo = books.find((product) => product?.id === Number(item));
+                totalAmount += itemInfo?.saleInfo.retailPrice?.amount ||499* cartItems[item];
+            }
+        }
+        return totalAmount;
+    };
+
+    const getTotalitem = () => {
+        let totalitem = 0;
+        for (const item in cartItems) {
+            if (cartItems[item] > 0) {
+                totalitem += cartItems[item];
+            }
+        }
+        return totalitem;
+    };
 
     return (
         <userContext.Provider value={{
@@ -146,14 +165,17 @@ export const UserContextProvider = ({ children }) => {
             authenticateUser,
             newUser,
             logout,
-            setCartUser,
-            removeFromCart,
+            removeCart,
+            gettotalAmount,
+            getTotalitem,
             checkOut,
-            userCart,
-            setUserCart,
-            userOrder,loading,books
+            addToCart,
+            cartItems,
+            userOrder,
+            loading,
+            books
         }}>
             {children}
         </userContext.Provider>
-    )
-}
+    );
+};

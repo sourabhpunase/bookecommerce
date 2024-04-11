@@ -5,16 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #010105;
-  opacity: 0.9;
-  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #010105 60px ), repeating-linear-gradient( #04123055, #041230 );
+ 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.wallpaper-container {
+/* .wallpaper-container {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -57,4 +55,4 @@ code {
   100% {
     opacity: 0;
   }
-}
+} */

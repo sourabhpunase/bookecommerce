@@ -1,0 +1,70 @@
+/* filter.css */
+
+.filter-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-transform: capitalize;
+    margin-bottom: 50px;
+}
+
+.filter-type {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+ gap: 15px;
+    margin-left: 45px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+.filter-type div {
+    position: relative;
+}
+
+.filter-type input[type="checkbox"] {
+    display: none;
+}
+
+.filter-type label {
+    display: block;
+    background-color: #d1dede88;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-type input[type="checkbox"]:checked + label {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .filter-type {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .filter-type {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+}
+
+/* Active Filter Indicator */
+.filter-type input[type="checkbox"]:checked + label::before {
+    content: "✔";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #28a745;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+}
