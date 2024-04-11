@@ -14,7 +14,7 @@ export const Header = () => {
   const { books } = useUserContext();
 
   const truncateTitle = (title, maxLines) => {
-    const maxHeight = maxLines * 2.2; // Assuming each line height is 1.2em
+    const maxHeight = maxLines * 2.2; 
     return {
       maxHeight: `${maxHeight}em`,
       overflow: 'hidden',
@@ -26,7 +26,7 @@ export const Header = () => {
   };
 
   const truncateDescription = (description, maxLines) => {
-    const maxHeight = maxLines * 5.8; // Assuming each line height is 1.2em
+    const maxHeight = maxLines * 5.8; 
     return {
       maxHeight: `${maxHeight}em`,
       overflow: 'hidden',

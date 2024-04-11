@@ -18,6 +18,8 @@ import { UserContextProvider } from './userContext';
 import { Header } from './Components/Home/Header';
 import { Control } from './Components/route/Control';
 import Search from './Components/Home/Search';
+import { About } from './pages/About';
+import ContactForm from './pages/Contact';
 
 function App() {
   const [showWallpaper, setShowWallpaper] = useState(true);
@@ -34,29 +36,14 @@ function App() {
         <meta name="description" content="Busy buy is an e-commerce website where we purchase any items." />
       </Helmet>
 
-      {/* Render the WallpaperComponent */}
-      {/* {showWallpaper && (
-        <div
-          className="wallpaper-container"
-          onAnimationEnd={handleAnimationEnd}
-        >
-          <div
-            className="wallpaper fade-in"
-            style={{
-              backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWg0pFUup4I5zk6ofaEYAXjkv1E6K_fVbAwdGeU6HdOGjnehwqj4vVvDxTbqpL1VEn5yg&usqp=CAU')`
-            }}
-          />
-        </div>
-      )} */}
-
-      {/* Render the router provider */}
       <Router>
         <UserContextProvider>
        <Navbar/>
           <Routes>
            
             <Route path="/"  element={<Control/>} />
-            <Route path='/search' element={Search}/>
+        <Route path='about' element={<About/>}/>
+        <Route path='/contact' element={<ContactForm/>}/>
             
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />

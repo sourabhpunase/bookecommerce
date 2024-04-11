@@ -41,8 +41,6 @@ export const UserContextProvider = ({ children }) => {
     const month = currentDate.getMonth() + 1;
     const date = currentDate.getDate();
 
-
-
     useEffect(() => {
         fetchBooks();
     }, []);
@@ -119,6 +117,11 @@ export const UserContextProvider = ({ children }) => {
             [itemId]: prev[itemId] + 1
         }));
         console.log(cartItems);
+        notifyItemAdded(); // Call the notification function here
+    };
+
+    const notifyItemAdded = () => {
+        toast.success("Item added to cart successfully!");
     };
 
     const checkOut = () => {

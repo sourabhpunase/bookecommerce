@@ -4,7 +4,8 @@ nav{
     place-items: center;
     position: sticky;
     top: 0;
-    background: var(--color-bg-1);
+    background: linear-gradient(320deg, rgba(127, 134, 133, 0.459), rgba(204, 220, 219, 0.568));
+    
     z-index: 100;
     border: 1px solid var(--color-dark-Ex);
 

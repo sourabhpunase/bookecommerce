@@ -1,11 +1,27 @@
 /* filterproduct.css */
 
+/* Define default grid layout */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, minmax(250px, 1fr)); /* Default: 3 columns */
     grid-gap: 20px;
 }
 
+/* Adjust grid layout for smaller screens */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, minmax(250px, 1fr)); /* 2 columns for screens <= 768px */
+    }
+}
+
+/* Adjust grid layout for even smaller screens */
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: repeat(1, minmax(250px, 1fr)); /* 1 column for screens <= 480px */
+    }
+}
+
+/* Gallery item styles */
 .gallery-item {
     position: relative;
     overflow: hidden;
@@ -17,7 +33,8 @@
 .gallery-item:hover {
     transform: translateY(-5px);
 }
-.end-btn{
+
+.end-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,7 +43,7 @@
 .popularbook-image {
     position: relative;
     width: 100%;
-    height: 200px; /* Adjust the height as needed */
+    height: 200px;
     overflow: hidden;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;

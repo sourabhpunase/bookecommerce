@@ -3,7 +3,7 @@ import Home from '../Home/Home'
 import { Header } from '../Home/Header'
 import Navbar from '../Navbar/Navbar'
 import { Brands } from '../brands/Brands'
-import { Popular } from '../Home/Popular'
+
 
 export const Control = () => {
   return (

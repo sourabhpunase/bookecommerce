@@ -10,12 +10,7 @@ import { NavLink, Navigate } from 'react-router-dom';
 
 const Cart = () => {
     const {books,cartItems,addToCart, removeCart, checkOut,gettotalAmount, authenticate} = useUserContext();
-    //if not authenticate then return homepage
-    // if(!authenticate){
-    //     return (
-    //         <Navigate to='/' replace={true}/>
-    //     )
-    // }
+
     return (
         <div className='cartitems'>
         <div className="cartitem-main">

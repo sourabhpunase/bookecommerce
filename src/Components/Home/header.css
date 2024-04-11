@@ -73,10 +73,10 @@ transition: var(--transition);
     width: fit-content !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: center; /* Center horizontally */
+    justify-content: center; 
     gap: 20px !important;
-    margin: 0 auto; /* Center horizontally */
-    text-align: center; /* Center horizontally */
+    margin: 0 auto; 
+    text-align: center; 
     margin-bottom: 4px;
   }
   

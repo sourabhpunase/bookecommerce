@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './filter.css'
 const CategoryFilter = ({ handleCategoryFilter, isCategorySelected }) => {
     const [showFilters, setShowFilters] = useState(false);
-    const toggleFilters = () => { // Function to toggle filter visibility
-        setShowFilters(!showFilters); // Toggle the state
+    const toggleFilters = () => { 
+        setShowFilters(!showFilters); 
     };
     return (
         <aside className='filter-container'>

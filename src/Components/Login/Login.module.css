@@ -1,81 +1,94 @@
-.container{
-    width: 40%;
-    background-color: #055a15b0;
-    border-radius: 30px;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-    padding: 0.45%;
-    padding-top: 2%;
-    margin: auto;
-}
-.container h2{
-    color: #fff;
-    font-weight: 800;
-    font-size: 30px;
-    text-align: center;
-}
-.form{
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 15px;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 15px 0px;
-}
-.inputContainer{
-    width: 90%;
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
+/* Login.module.css */
 
-}
-.inputContainer label{
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(320deg, rgba(121, 66, 129, 0.974), rgba(32, 118, 112, 0.568));
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .inputContainer {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
     margin-bottom: 5px;
-    font-weight: bold;
-    color: #03530a;
-}
-.inputContainer input{
-    width: 90%;
-    padding: 3%;
-    border: 2px solid #0e8343;
-    border-radius: 30px;
-    outline: none;
-}
-.button{
-    width: 20%;
-    padding: 3%;
-    background-color: #024b10b5;
-    text-align: center;
-    border-radius: 30px;
-    border: 3px solid #023218;
-    font-weight: bold;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #007bff;
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
     color: #fff;
-    cursor: pointer;
-    margin-top: 1%;
     text-decoration: none;
-    transition: all 0.3s linear;
-}
-.button:hover{
-    background-color: #fff;
-    color: #02390c;
-}
-.button:active{
-    scale: 0.9;
-}
-.text{
     text-align: center;
-    width: 250px;
-    font-size: 15px;
-    font-weight: 600;
-    color: #00180c;
-}
-.link{
-    text-decoration: underline;
-    display: inline;
-    cursor: pointer;
-    color: #00180c;
-}
-.link:hover{
-    color: #666;
-}
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  .text {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media screen and (max-width: 500px) {
+    .container {
+      max-width: 90%;
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
+    .container {
+      padding: 10px;
+    }
+    .button {
+      width: 100%;
+    }
+  }
+  

@@ -5,7 +5,7 @@ import './filterproduct.css';
 const FilteredProducts = ({ filteredBooks, addToCart }) => {
 
     const truncateDescription = (description, maxLines) => {
-        const maxHeight = maxLines * 1.8; // Assuming each line height is 1.2em
+        const maxHeight = maxLines * 1.8; 
         return {
             maxHeight: `${maxHeight}em`,
             overflow: 'hidden',
