@@ -1,8 +1,31 @@
-# Getting Started with Create React App
+### hoisted link
+https://6617e1cbdc7cdf009a74db82--lighthearted-souffle-73f923.netlify.app/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### About
+created using react and firebase for auth
+fetched data from a mock API
+used Context for state management in react
+Responsive
+Glassmorphism and CSS pattern for Styling
 
-## Available Scripts
+
+## features
+login and signup using firestore
+all products displayed on hero section
+Search filters for all categories
+# filter
+on basis of author
+on basis of title 
+on basis category
+
+# search
+you can search on searchbar to get product
+
+# cart
+user can add to cart and than proceed to order
+
+
+
 
 In the project directory, you can run:
 
